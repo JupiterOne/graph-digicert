@@ -9,7 +9,7 @@ directly to DigiCert REST APIs to obtain certificate details.
 
 The integration is triggered by an event containing the information for a
 specific integration instance. Users configure the integration by providing API
-credentials obtained through the DigiCert account.
+credentials obtained through the DigiCert CertCentral account.
 
 DigiCert documentation provides detailed [instructions to enable API access][1].
 

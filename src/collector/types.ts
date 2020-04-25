@@ -9,6 +9,21 @@ export interface PaginatedResponse {
   total: number;
 }
 
+export interface Account {
+  id: number;
+  make_renewal_calls: boolean;
+  express_install_enabled: boolean;
+  admin_email: string; // comma separated strings
+  display_rep: boolean;
+  rep_name: string;
+  rep_phone: string;
+  rep_email: string;
+  balance_negative_limit: number;
+  pricing_model: string;
+  cert_transparency: string;
+  cert_central_type: string;
+}
+
 export interface ListDomainResponse extends PaginatedResponse {
   domains: Domain[];
 }

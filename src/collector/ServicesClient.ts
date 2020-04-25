@@ -2,7 +2,7 @@ import { retry } from '@lifeomic/attempt';
 import nodeFetch, { Request } from 'node-fetch';
 
 import { retryableRequestError, fatalRequestError } from './error';
-import { ListDomainResponse, PaginationInput } from './types';
+import { ListDomainResponse, PaginationInput, Account } from './types';
 import { URLSearchParams } from 'url';
 
 const API_BASE_URL = 'https://www.digicert.com/services/v2';
@@ -31,6 +31,15 @@ export class ServicesClient {
     this.requiredHeaders = {
       'X-DC-DEVKEY': apiKey,
     };
+  }
+
+  /**
+   * Get Account Details
+   *
+   * ref: https://dev.digicert.com/services-api/account/account-details/
+   */
+  getAccountDetails(): Promise<Account> {
+    return this.fetch('/account');
   }
 
   /**
