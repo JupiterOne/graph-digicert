@@ -9,9 +9,9 @@ Polly.register(FSPersister);
 
 export { Polly } from '@pollyjs/core';
 
-class TrendMicroFSPersister extends FSPersister {
+class DigiCertFSPersister extends FSPersister {
   static get id(): string {
-    return 'TrendMicroFSPersister';
+    return 'DigiCertFSPersister';
   }
 
   saveRecording(recordingId: number, data: Har): void {
@@ -45,9 +45,9 @@ class TrendMicroFSPersister extends FSPersister {
 export function setupPolly(recordingsDir: string, name: string): Polly {
   return new Polly(name, {
     adapters: ['node-http'],
-    persister: TrendMicroFSPersister,
+    persister: DigiCertFSPersister,
     persisterOptions: {
-      TrendMicroFSPersister: {
+      DigiCertFSPersister: {
         recordingsDir: `${recordingsDir}/__recordings__`,
       },
     },
