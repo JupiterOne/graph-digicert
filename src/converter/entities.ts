@@ -47,9 +47,7 @@ export const convertDomainCertificate = (
         organization: domain.organization.name,
         organizationId: domain.organization.id,
         createdOn: getTime(domain.date_created),
-        expiresOn: domain.dcv_expiration?.ov
-          ? getTime(domain.dcv_expiration?.ov)
-          : undefined,
+        expiresOn: getTime(domain.dcv_expiration?.ov),
       },
     },
   });
