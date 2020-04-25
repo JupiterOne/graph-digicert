@@ -1,4 +1,4 @@
-import { Domain, Account } from '../collector';
+import { DigiCertDomain, DigiCertAccount } from '../collector';
 import {
   createIntegrationEntity,
   getTime,
@@ -7,7 +7,7 @@ import {
 import createEntityKey from './utils/createEntityKey';
 
 export const convertAccount = (
-  account: Account,
+  account: DigiCertAccount,
 ): ReturnType<typeof createIntegrationEntity> =>
   createIntegrationEntity({
     entityData: {
@@ -27,7 +27,7 @@ export const convertAccount = (
   });
 
 export const convertDomain = (
-  domain: Domain,
+  domain: DigiCertDomain,
 ): ReturnType<typeof createIntegrationEntity> =>
   createIntegrationEntity({
     entityData: {

@@ -9,7 +9,7 @@ export interface PaginatedResponse {
   total: number;
 }
 
-export interface Account {
+export interface DigiCertAccount {
   id: number;
   make_renewal_calls: boolean;
   express_install_enabled: boolean;
@@ -25,10 +25,10 @@ export interface Account {
 }
 
 export interface ListDomainResponse extends PaginatedResponse {
-  domains: Domain[];
+  domains: DigiCertDomain[];
 }
 
-export interface Organization {
+export interface DigiCertOrganization {
   id: number;
   status: string;
   name: string;
@@ -36,7 +36,7 @@ export interface Organization {
   is_active: string;
 }
 
-export interface Validation {
+export interface DigiCertDomainValidation {
   type: string;
   name: string;
   description: string;
@@ -45,21 +45,21 @@ export interface Validation {
   status: string;
 }
 
-export interface Container {
+export interface DigiCertDomainContainer {
   id: number;
   parent_id: number;
   name: string;
   is_active: boolean;
 }
 
-export interface Domain {
+export interface DigiCertDomain {
   id: number;
   is_active: boolean;
   name: string;
   date_created: string;
-  organization: Organization;
-  validations: Validation[];
+  organization: DigiCertOrganization;
+  validations: DigiCertDomainValidation[];
   dcv_method: string;
   dcv_expiration: { ov: string; ev: string };
-  container: Container;
+  container: DigiCertDomainContainer;
 }
