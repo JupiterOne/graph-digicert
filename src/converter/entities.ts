@@ -33,9 +33,13 @@ export const convertDomainCertificate = (
     entityData: {
       source: domain,
       assign: {
-        _key: createEntityKey('digicert_domain_certificate', domain.id),
+        _key: createEntityKey(
+          'digicert_domain_certificate',
+          `${domain.organization.id}:${domain.id}`,
+        ),
         _type: 'digicert_domain_certificate',
         _class: 'Certificate',
+        id: `${domain.organization.id}:${domain.id}`,
         domainId: domain.id,
         name: domain.name,
         active: domain.is_active,

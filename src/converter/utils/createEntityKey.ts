@@ -1,5 +1,5 @@
-function createApiKeyEntityIdentifier(type: string, id: number): string {
+function createEntityKey(type: string, id: number | string): string {
   return `${type}:${id}`;
 }
 
-export default createApiKeyEntityIdentifier;
+export default createEntityKey;
