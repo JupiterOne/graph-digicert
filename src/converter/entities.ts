@@ -26,7 +26,7 @@ export const convertAccount = (
     },
   });
 
-export const convertDomain = (
+export const convertDomainCertificate = (
   domain: DigiCertDomain,
 ): ReturnType<typeof createIntegrationEntity> =>
   createIntegrationEntity({
@@ -40,6 +40,8 @@ export const convertDomain = (
         name: domain.name,
         active: domain.is_active,
         displayName: domain.name,
+        organization: domain.organization.name,
+        organizationId: domain.organization.id,
         createdOn: getTime(domain.date_created),
         expiresOn: domain.dcv_expiration?.ov
           ? getTime(domain.dcv_expiration?.ov)

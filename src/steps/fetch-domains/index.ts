@@ -5,7 +5,7 @@ import {
 } from '@jupiterone/integration-sdk';
 
 import { createServicesClient } from '../../collector';
-import { convertDomain, convertAccount } from '../../converter';
+import { convertDomainCertificate, convertAccount } from '../../converter';
 
 const step: IntegrationStep = {
   id: 'fetch-domains',
@@ -23,7 +23,7 @@ const step: IntegrationStep = {
 
     // TODO: Need to add pagination here, default returned/max is 1000
     const { domains } = await client.iterateDomains();
-    const domainEntities = domains.map(convertDomain);
+    const domainEntities = domains.map(convertDomainCertificate);
     await jobState.addEntities(domainEntities);
 
     const accountDomainRelationships = domainEntities.map((domainEntity) =>
