@@ -17,9 +17,11 @@ export const convertAccount = (
         _key: createEntityKey('digicert_account', account.id),
         _type: 'digicert_account',
         _class: 'Account',
+        id: account.id.toString(),
+        name: account.id.toString(),
         accountId: account.id,
-        displayName: account.id.toString(),
-        adminEmail: account.admin_email.includes(',')
+        displayName: `DigiCert:${account.id}`,
+        adminEmail: account.admin_email?.includes(',')
           ? account.admin_email.split(',').map((e) => e.trim())
           : account.admin_email,
       },

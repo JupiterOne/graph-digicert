@@ -22,6 +22,8 @@ export interface DigiCertAccount {
   pricing_model: string;
   cert_transparency: string;
   cert_central_type: string;
+  primary_organization_name: string;
+  primary_organization_country: string;
 }
 
 export interface ListDomainResponse extends PaginatedResponse {
