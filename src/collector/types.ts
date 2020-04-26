@@ -9,19 +9,47 @@ export interface PaginatedResponse {
   total: number;
 }
 
-export interface ListDomainResponse extends PaginatedResponse {
-  domains: Domain[];
+export interface DigiCertAccount {
+  id: number;
+  make_renewal_calls: boolean;
+  express_install_enabled: boolean;
+  admin_email: string; // comma separated strings
+  display_rep: boolean;
+  rep_name: string;
+  rep_phone: string;
+  rep_email: string;
+  balance_negative_limit: number;
+  pricing_model: string;
+  cert_transparency: string;
+  cert_central_type: string;
+  primary_organization_name: string;
+  primary_organization_country: string;
 }
 
-export interface Organization {
+export interface ListDomainResponse extends PaginatedResponse {
+  domains: DigiCertDomain[];
+}
+
+export interface ListOrderResponse extends PaginatedResponse {
+  orders: DigiCertOrder[];
+}
+
+export interface DigiCertOrganization {
   id: number;
-  status: string;
   name: string;
+  status: string;
   display_name: string;
   is_active: string;
 }
 
-export interface Validation {
+export interface DigiCertContainer {
+  id: number;
+  name: string;
+  parent_id?: number;
+  is_active?: boolean;
+}
+
+export interface DigiCertDomainValidation {
   type: string;
   name: string;
   description: string;
@@ -30,21 +58,44 @@ export interface Validation {
   status: string;
 }
 
-export interface Container {
-  id: number;
-  parent_id: number;
-  name: string;
-  is_active: boolean;
-}
-
-export interface Domain {
+export interface DigiCertDomain {
   id: number;
   is_active: boolean;
   name: string;
   date_created: string;
-  organization: Organization;
-  validations: Validation[];
+  organization: DigiCertOrganization;
+  validations: DigiCertDomainValidation[];
   dcv_method: string;
   dcv_expiration: { ov: string; ev: string };
-  container: Container;
+  container: DigiCertContainer;
+}
+
+export interface DigiCertCertificate {
+  id: number;
+  common_name: string;
+  dns_names: string[];
+  signature_hash: string;
+  valid_till?: string;
+  days_remaining?: number;
+}
+
+export interface DigiCertProduct {
+  name_id: string;
+  name: string;
+  type: string;
+}
+
+export interface DigiCertOrder {
+  id: number;
+  certificate: DigiCertCertificate;
+  status: string;
+  is_renewed: boolean;
+  date_created: string;
+  organization: DigiCertOrganization;
+  validity_years: number;
+  disable_renewal_notifications: boolean;
+  container: DigiCertContainer;
+  product: DigiCertProduct;
+  has_duplicates: boolean;
+  product_name_id: string;
 }
