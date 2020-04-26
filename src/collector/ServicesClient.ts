@@ -2,7 +2,12 @@ import { retry } from '@lifeomic/attempt';
 import nodeFetch, { Request } from 'node-fetch';
 
 import { retryableRequestError, fatalRequestError } from './error';
-import { ListDomainResponse, PaginationInput, DigiCertAccount } from './types';
+import {
+  ListDomainResponse,
+  PaginationInput,
+  DigiCertAccount,
+  ListOrderResponse,
+} from './types';
 import { URLSearchParams } from 'url';
 
 const API_BASE_URL = 'https://www.digicert.com/services/v2';
@@ -49,6 +54,15 @@ export class ServicesClient {
    */
   iterateDomains(pagination?: PaginationInput): Promise<ListDomainResponse> {
     return this.fetch('/domain', { ...pagination, includeValidation: 'true' });
+  }
+
+  /**
+   * Lists _all_ orders
+   *
+   * ref: https://dev.digicert.com/services-api/orders/list-orders/
+   */
+  iterateOrders(pagination?: PaginationInput): Promise<ListOrderResponse> {
+    return this.fetch('/order/certificate', { ...pagination });
   }
 
   fetch<T = object>(

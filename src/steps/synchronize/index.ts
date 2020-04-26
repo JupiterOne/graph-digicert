@@ -5,12 +5,12 @@ import {
 } from '@jupiterone/integration-sdk';
 
 import { createServicesClient } from '../../collector';
-import { convertDomainCertificate, convertAccount } from '../../converter';
+import { convertAccount, convertOrder } from '../../converter';
 
 const step: IntegrationStep = {
-  id: 'fetch-domains',
-  name: 'Fetch Domains',
-  types: ['digicert_domain'],
+  id: 'synchronize',
+  name: 'Fetch DigiCert Objects',
+  types: ['digicert_domain', 'digicert_certificate'],
   async executionHandler({
     instance,
     jobState,
@@ -22,18 +22,18 @@ const step: IntegrationStep = {
     await jobState.addEntities([accountEntity]);
 
     // TODO: Need to add pagination here, default returned/max is 1000
-    const { domains } = await client.iterateDomains();
-    const domainEntities = domains.map(convertDomainCertificate);
-    await jobState.addEntities(domainEntities);
+    const { orders } = await client.iterateOrders();
+    const orderEntities = orders ? orders.map(convertOrder) : [];
+    await jobState.addEntities(orderEntities);
 
-    const accountDomainRelationships = domainEntities.map((domainEntity) =>
+    const accountOrderRelationships = orderEntities.map((orderEntity) =>
       createIntegrationRelationship({
         from: accountEntity,
-        to: domainEntity,
+        to: orderEntity,
         _class: 'HAS',
       }),
     );
-    await jobState.addRelationships(accountDomainRelationships);
+    await jobState.addRelationships(accountOrderRelationships);
   },
 };
 
