@@ -1,4 +1,9 @@
-import { DigiCertDomain, DigiCertAccount, DigiCertOrder } from '../collector';
+import {
+  DigiCertDomain,
+  DigiCertAccount,
+  DigiCertOrder,
+  DigiCertUser,
+} from '../collector';
 import {
   createIntegrationEntity,
   getTime,
@@ -24,6 +29,37 @@ export const convertAccount = (
         adminEmail: account.admin_email?.includes(',')
           ? account.admin_email.split(',').map((e) => e.trim())
           : account.admin_email,
+      },
+    },
+  });
+
+export const convertUser = (
+  data: DigiCertUser,
+): ReturnType<typeof createIntegrationEntity> =>
+  createIntegrationEntity({
+    entityData: {
+      source: data,
+      assign: {
+        _key: createEntityKey('digicert_user', `${data.account_id}:${data.id}`),
+        _type: 'digicert_user',
+        _class: 'User',
+        id: `${data.account_id}:${data.id}`,
+        accountId: data.account_id,
+        userId: data.id,
+        firstName: data.first_name,
+        lastName: data.last_name,
+        name: `${data.first_name} ${data.last_name}`,
+        status: data.status,
+        active: data.status === 'active',
+        displayName: data.email,
+        email: data.email,
+        phone: data.telephone,
+        jobTitle: data.job_title,
+        type: data.type,
+        roles: data.access_roles?.map((r) => r.name),
+        admin:
+          data.access_roles?.find((r) => r.name === 'Administrator') !==
+          undefined,
       },
     },
   });

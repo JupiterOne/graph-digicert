@@ -7,6 +7,7 @@ import {
   PaginationInput,
   DigiCertAccount,
   ListOrderResponse,
+  ListUserResponse,
 } from './types';
 import { URLSearchParams } from 'url';
 
@@ -63,6 +64,15 @@ export class ServicesClient {
    */
   iterateOrders(pagination?: PaginationInput): Promise<ListOrderResponse> {
     return this.fetch('/order/certificate', { ...pagination });
+  }
+
+  /**
+   * Lists _all_ users
+   *
+   * ref: https://dev.digicert.com/services-api/users/list-users/
+   */
+  iterateUsers(pagination?: PaginationInput): Promise<ListUserResponse> {
+    return this.fetch('/user', { ...pagination });
   }
 
   fetch<T = object>(
