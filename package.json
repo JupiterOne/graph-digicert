@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-digicert",
-  "version": "0.2.0",
+  "version": "1.1.0",
   "description": "A graph conversion tool for https://digicert.com",
   "license": "MPL-2.0",
   "scripts": {
