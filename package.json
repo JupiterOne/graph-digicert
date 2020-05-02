@@ -23,7 +23,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@jupiterone/integration-sdk": "^0.15.0",
+    "@jupiterone/integration-sdk": "^0.17.0",
     "@lifeomic/attempt": "^3.0.0",
     "node-fetch": "^2.6.0"
   },
