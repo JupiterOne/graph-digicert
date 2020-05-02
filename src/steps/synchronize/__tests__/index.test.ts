@@ -30,8 +30,8 @@ test('should fetch api keys and generate account entity from the result', async 
   const context = createStepContext();
   await step.executionHandler(context);
 
-  expect(context.jobState.collectedEntities).toHaveLength(1);
-  expect(context.jobState.collectedRelationships).toHaveLength(0);
+  expect(context.jobState.collectedEntities).toHaveLength(2);
+  expect(context.jobState.collectedRelationships).toHaveLength(1);
 
   expect(context.jobState.collectedEntities).toEqual([
     expect.objectContaining({
@@ -41,6 +41,13 @@ test('should fetch api keys and generate account entity from the result', async 
       name: '1449471',
       accountId: 1449471,
       displayName: 'DigiCert:1449471',
+    }),
+    expect.objectContaining({
+      _type: 'digicert_user',
+      _class: ['User'],
+      email: 'e@z.com',
+      firstName: 'Erkang',
+      admin: true,
     }),
   ]);
 });
@@ -117,6 +124,8 @@ test('should process order entities', async () => {
             offset: 0,
           },
         });
+      } else if (req.url.endsWith('/user')) {
+        return '{}';
       } else {
         return {
           status: 404,
@@ -131,7 +140,7 @@ test('should process order entities', async () => {
   const context = createStepContext();
   await step.executionHandler(context);
 
-  expect(fetchSpy).toHaveBeenCalledTimes(2);
+  expect(fetchSpy).toHaveBeenCalledTimes(3);
   expect(fetchSpy).toHaveBeenCalledWith(
     'https://www.digicert.com/services/v2/order/certificate',
     expect.any(Object),

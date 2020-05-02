@@ -34,12 +34,37 @@ export interface ListOrderResponse extends PaginatedResponse {
   orders: DigiCertOrder[];
 }
 
+export interface ListUserResponse extends PaginatedResponse {
+  users: DigiCertUser[];
+}
+
 export interface DigiCertOrganization {
   id: number;
   name: string;
   status: string;
   display_name: string;
   is_active: string;
+}
+
+export interface DigiCertUser {
+  id: number;
+  username: string;
+  account_id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  job_title: string;
+  telephone: string;
+  status: string;
+  container: DigiCertContainer;
+  access_roles: DigiCertAccessRole[];
+  type: string;
+  has_container_assignments: boolean;
+}
+
+export interface DigiCertAccessRole {
+  id: number;
+  name: string;
 }
 
 export interface DigiCertContainer {

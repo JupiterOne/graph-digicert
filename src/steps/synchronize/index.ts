@@ -5,12 +5,17 @@ import {
 } from '@jupiterone/integration-sdk';
 
 import { createServicesClient } from '../../collector';
-import { convertAccount, convertOrder } from '../../converter';
+import { convertAccount, convertOrder, convertUser } from '../../converter';
 
 const step: IntegrationStep = {
   id: 'synchronize',
   name: 'Fetch DigiCert Objects',
-  types: ['digicert_domain', 'digicert_certificate'],
+  types: [
+    'digicert_account',
+    'digicert_user',
+    'digicert_domain',
+    'digicert_certificate',
+  ],
   async executionHandler({
     instance,
     jobState,
@@ -26,6 +31,10 @@ const step: IntegrationStep = {
     const orderEntities = orders ? orders.map(convertOrder) : [];
     await jobState.addEntities(orderEntities);
 
+    const { users } = await client.iterateUsers();
+    const userEntities = users ? users.map(convertUser) : [];
+    await jobState.addEntities(userEntities);
+
     const accountOrderRelationships = orderEntities.map((orderEntity) =>
       createIntegrationRelationship({
         from: accountEntity,
@@ -34,6 +43,15 @@ const step: IntegrationStep = {
       }),
     );
     await jobState.addRelationships(accountOrderRelationships);
+
+    const accountUserRelationships = userEntities.map((userEntity) =>
+      createIntegrationRelationship({
+        from: accountEntity,
+        to: userEntity,
+        _class: 'HAS',
+      }),
+    );
+    await jobState.addRelationships(accountUserRelationships);
   },
 };
 
