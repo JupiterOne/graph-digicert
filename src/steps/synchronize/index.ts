@@ -15,6 +15,9 @@ const step: IntegrationStep = {
     'digicert_user',
     'digicert_domain',
     'digicert_certificate',
+    'digicert_account_has_user',
+    'digicert_account_has_domain',
+    'digicert_account_has_certificate',
   ],
   async executionHandler({
     instance,
