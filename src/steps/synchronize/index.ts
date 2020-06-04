@@ -2,10 +2,11 @@ import {
   IntegrationStep,
   IntegrationStepExecutionContext,
   createIntegrationRelationship,
-} from '@jupiterone/integration-sdk';
+} from '@jupiterone/integration-sdk-core';
 
 import { createServicesClient } from '../../collector';
 import { convertAccount, convertOrder, convertUser } from '../../converter';
+import { DigiCertIntegrationInstanceConfig } from 'src/types';
 
 const step: IntegrationStep = {
   id: 'synchronize',
@@ -22,7 +23,7 @@ const step: IntegrationStep = {
   async executionHandler({
     instance,
     jobState,
-  }: IntegrationStepExecutionContext) {
+  }: IntegrationStepExecutionContext<DigiCertIntegrationInstanceConfig>) {
     const client = createServicesClient(instance);
 
     const account = await client.getAccountDetails();

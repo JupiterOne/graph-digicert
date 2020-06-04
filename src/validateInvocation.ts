@@ -1,12 +1,13 @@
 import {
   IntegrationExecutionContext,
   IntegrationInstance,
-} from '@jupiterone/integration-sdk';
+} from '@jupiterone/integration-sdk-core';
 
 import { createServicesClient } from './collector';
+import { DigiCertIntegrationInstanceConfig } from './types';
 
 export default async function validateInvocation(
-  context: IntegrationExecutionContext,
+  context: IntegrationExecutionContext<DigiCertIntegrationInstanceConfig>,
 ): Promise<void> {
   context.logger.info(
     {
@@ -23,7 +24,7 @@ export default async function validateInvocation(
 }
 
 async function isConfigurationValid(
-  instance: IntegrationInstance,
+  instance: IntegrationInstance<DigiCertIntegrationInstanceConfig>,
 ): Promise<boolean> {
   // perform test api call. This will fail if we do not have access.
   try {
