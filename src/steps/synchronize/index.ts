@@ -6,9 +6,9 @@ import {
 
 import { createServicesClient } from '../../collector';
 import { convertAccount, convertOrder, convertUser } from '../../converter';
-import { DigiCertIntegrationInstanceConfig } from 'src/types';
+import { DigiCertIntegrationInstanceConfig } from '../../types';
 
-const step: IntegrationStep = {
+const step: IntegrationStep<DigiCertIntegrationInstanceConfig> = {
   id: 'synchronize',
   name: 'Fetch DigiCert Objects',
   types: [

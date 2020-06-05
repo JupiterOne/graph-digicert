@@ -1,6 +1,6 @@
 import { IntegrationInstance } from '@jupiterone/integration-sdk-core';
 import { ServicesClient } from './ServicesClient';
-import { DigiCertIntegrationInstanceConfig } from 'src/types';
+import { DigiCertIntegrationInstanceConfig } from '../types';
 
 export * from './types';
 

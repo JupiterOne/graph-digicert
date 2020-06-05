@@ -3,7 +3,7 @@ import { createMockExecutionContext } from '@jupiterone/integration-sdk-testing'
 import validateInvocation from '../validateInvocation';
 
 import fetchMock from 'jest-fetch-mock';
-import { DigiCertIntegrationInstanceConfig } from 'src/types';
+import { DigiCertIntegrationInstanceConfig } from '../types';
 
 beforeEach(() => {
   fetchMock.doMock();
@@ -15,7 +15,7 @@ test('rejects if apiKey is not present', async () => {
   const context = createMockExecutionContext<
     DigiCertIntegrationInstanceConfig
   >();
-  context.instance.config.apiKey = undefined;
+  context.instance.config = {} as DigiCertIntegrationInstanceConfig;
 
   await expect(validateInvocation(context)).rejects.toThrow(
     /Failed to authenticate/,
