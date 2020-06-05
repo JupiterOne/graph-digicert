@@ -1,6 +1,5 @@
 import {
   IntegrationStep,
-  IntegrationStepExecutionContext,
   createIntegrationRelationship,
 } from '@jupiterone/integration-sdk-core';
 
@@ -20,10 +19,7 @@ const step: IntegrationStep<DigiCertIntegrationInstanceConfig> = {
     'digicert_account_has_domain',
     'digicert_account_has_certificate',
   ],
-  async executionHandler({
-    instance,
-    jobState,
-  }: IntegrationStepExecutionContext<DigiCertIntegrationInstanceConfig>) {
+  async executionHandler({ instance, jobState }) {
     const client = createServicesClient(instance);
 
     const account = await client.getAccountDetails();
