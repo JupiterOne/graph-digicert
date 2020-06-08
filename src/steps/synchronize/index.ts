@@ -1,13 +1,13 @@
 import {
   IntegrationStep,
-  IntegrationStepExecutionContext,
   createIntegrationRelationship,
-} from '@jupiterone/integration-sdk';
+} from '@jupiterone/integration-sdk-core';
 
 import { createServicesClient } from '../../collector';
 import { convertAccount, convertOrder, convertUser } from '../../converter';
+import { DigiCertIntegrationInstanceConfig } from '../../types';
 
-const step: IntegrationStep = {
+const step: IntegrationStep<DigiCertIntegrationInstanceConfig> = {
   id: 'synchronize',
   name: 'Fetch DigiCert Objects',
   types: [
@@ -19,10 +19,7 @@ const step: IntegrationStep = {
     'digicert_account_has_domain',
     'digicert_account_has_certificate',
   ],
-  async executionHandler({
-    instance,
-    jobState,
-  }: IntegrationStepExecutionContext) {
+  async executionHandler({ instance, jobState }) {
     const client = createServicesClient(instance);
 
     const account = await client.getAccountDetails();
