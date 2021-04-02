@@ -9,7 +9,6 @@ directly to DigiCert REST APIs to obtain certificate details.
 
 - Visualize DigiCert users and certificates in the JupiterOne graph.
 - Map DigiCert certificates to the domains using them.
-- Monitor changes DigiCert users and certificates using JupiterOne alerts.
 - Monitor changes to DigiCert users and certificates using JupiterOne alerts.
 
 ## How it Works
