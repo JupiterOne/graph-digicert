@@ -1,10 +1,5 @@
 # Integration with JupiterOne
 
-## Overview
-
-JupiterOne provides a managed integration for DigiCert. The integration connects
-directly to DigiCert REST APIs to obtain certificate details.
-
 ## DigiCert + JupiterOne Integration Benefits
 
 - Visualize DigiCert users and certificates in the JupiterOne graph.
