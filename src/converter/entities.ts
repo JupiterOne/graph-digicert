@@ -10,6 +10,7 @@ import {
   convertProperties,
 } from '@jupiterone/integration-sdk-core';
 import createEntityKey from './utils/createEntityKey';
+import { Entities } from '../constants';
 
 export const convertAccount = (
   account: DigiCertAccount,
@@ -19,9 +20,9 @@ export const convertAccount = (
       source: account,
       assign: {
         ...convertProperties(account),
-        _key: createEntityKey('digicert_account', account.id),
-        _type: 'digicert_account',
-        _class: 'Account',
+        _key: createEntityKey(Entities.ACCOUNT._type, account.id),
+        _type: Entities.ACCOUNT._type,
+        _class: Entities.ACCOUNT._class,
         id: account.id.toString(),
         name: account.id.toString(),
         accountId: account.id,
@@ -40,9 +41,12 @@ export const convertUser = (
     entityData: {
       source: data,
       assign: {
-        _key: createEntityKey('digicert_user', `${data.account_id}:${data.id}`),
-        _type: 'digicert_user',
-        _class: 'User',
+        _key: createEntityKey(
+          Entities.USER._type,
+          `${data.account_id}:${data.id}`,
+        ),
+        _type: Entities.USER._type,
+        _class: Entities.USER._class,
         id: `${data.account_id}:${data.id}`,
         accountId: data.account_id,
         userId: data.id,
@@ -72,11 +76,11 @@ export const convertDomain = (
       source: data,
       assign: {
         _key: createEntityKey(
-          'digicert_domain',
+          Entities.DOMAIN._type,
           `${data.organization.id}:${data.id}`,
         ),
-        _type: 'digicert_domain',
-        _class: 'Domain',
+        _type: Entities.DOMAIN._type,
+        _class: Entities.DOMAIN._class,
         id: `${data.organization.id}:${data.id}`,
         domainId: data.id,
         name: data.name,
@@ -97,9 +101,9 @@ export const convertOrder = (
     entityData: {
       source: data,
       assign: {
-        _key: createEntityKey('digicert_certificate', data.id),
-        _type: 'digicert_certificate',
-        _class: 'Certificate',
+        _key: createEntityKey(Entities.CERTIFICATE._type, data.id),
+        _type: Entities.CERTIFICATE._type,
+        _class: Entities.CERTIFICATE._class,
         id: data.id.toString(),
         orderId: data.id,
         certificateId: data.certificate.id,

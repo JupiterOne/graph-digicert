@@ -1,6 +1,7 @@
 import { IntegrationInstanceConfigFieldMap } from '@jupiterone/integration-sdk-core';
+import { DigiCertIntegrationInstanceConfig } from './types';
 
-const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
+const instanceConfigFields: IntegrationInstanceConfigFieldMap<DigiCertIntegrationInstanceConfig> = {
   apiKey: {
     type: 'string',
     mask: true,

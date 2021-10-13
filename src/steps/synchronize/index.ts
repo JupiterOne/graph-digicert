@@ -1,23 +1,21 @@
 import {
   IntegrationStep,
-  createIntegrationRelationship,
+  createDirectRelationship,
+  RelationshipClass,
 } from '@jupiterone/integration-sdk-core';
 
 import { createServicesClient } from '../../collector';
+import { Entities, Relationships, StepIds } from '../../constants';
 import { convertAccount, convertOrder, convertUser } from '../../converter';
 import { DigiCertIntegrationInstanceConfig } from '../../types';
 
 const step: IntegrationStep<DigiCertIntegrationInstanceConfig> = {
-  id: 'synchronize',
+  id: StepIds.SYNCHRONIZE,
   name: 'Fetch DigiCert Objects',
-  types: [
-    'digicert_account',
-    'digicert_user',
-    'digicert_domain',
-    'digicert_certificate',
-    'digicert_account_has_user',
-    'digicert_account_has_domain',
-    'digicert_account_has_certificate',
+  entities: [Entities.ACCOUNT, Entities.USER, Entities.CERTIFICATE],
+  relationships: [
+    Relationships.ACCOUNT_HAS_USER,
+    Relationships.ACCOUNT_HAS_CERTIFICATE,
   ],
   async executionHandler({ instance, jobState }) {
     const client = createServicesClient(instance);
@@ -36,19 +34,19 @@ const step: IntegrationStep<DigiCertIntegrationInstanceConfig> = {
     await jobState.addEntities(userEntities);
 
     const accountOrderRelationships = orderEntities.map((orderEntity) =>
-      createIntegrationRelationship({
+      createDirectRelationship({
         from: accountEntity,
         to: orderEntity,
-        _class: 'HAS',
+        _class: RelationshipClass.HAS,
       }),
     );
     await jobState.addRelationships(accountOrderRelationships);
 
     const accountUserRelationships = userEntities.map((userEntity) =>
-      createIntegrationRelationship({
+      createDirectRelationship({
         from: accountEntity,
         to: userEntity,
-        _class: 'HAS',
+        _class: RelationshipClass.HAS,
       }),
     );
     await jobState.addRelationships(accountUserRelationships);

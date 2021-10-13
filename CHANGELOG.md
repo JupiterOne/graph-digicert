@@ -9,3 +9,5 @@ and this project adheres to
 ## [Unreleased]
 
 ### Changed
+
+- Upgraded `@jupiterone/integration-sdk-*@^7.0.0`
