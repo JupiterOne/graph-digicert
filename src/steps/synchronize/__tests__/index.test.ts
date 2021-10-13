@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { createStepContext } from '../../../../test';
 import { Recording, setupRecording } from '@jupiterone/integration-sdk-testing';
 import nodeFetch from 'node-fetch';
@@ -55,6 +54,7 @@ test('should fetch api keys and generate account entity from the result', async 
 test('should process order entities', async () => {
   fetchMock.mockIf(
     /^https?:\/\/www.digicert.com\/services\/v2.*$/,
+    // eslint-disable-next-line @typescript-eslint/require-await
     async (req) => {
       if (req.url.endsWith('/account')) {
         return "{\"id\":1449471,\"primary_organization_name\":\"Erkang, LLC\",\"primary_organization_country\":\"us\",\"make_renewal_calls\":true,\"express_install_enabled\":false,\"display_rep\":true,\"balance_negative_limit\":0,\"root_container_id\":357777,\"cert_transparency\":\"embed\",\"cert_central_type\":\"retail\",\"billing_account_id\":1449471,\"billing_account_name\":\"Erkang, LLC\",\"language_id\":1,\"migrated\":false,\"has_auth_key\":false}";
@@ -171,7 +171,6 @@ test('should process order entities', async () => {
       displayName: 'example.com',
       dnsNames: ['example2.com', 'example3.com'],
       alternativeNames: ['example2.com', 'example3.com'],
-      active: false,
       signatureHash: 'sha256',
       type: 'ssl_certificate',
       productName: 'Standard SSL',
