@@ -54,33 +54,6 @@ DigiCert documentation provides detailed [instructions to enable API access][1].
 4. Click the **trash can** icon.
 5. Click the **Remove** button to delete the integration.
 
-## Data Model
-
-### Entities
-
-The following entity resources are ingested when the integration runs.
-
-| DigiCert Resources | \_type of the Entity   | \_class of the Entity |
-| ------------------ | ---------------------- | --------------------- |
-| Account            | `digicert_account`     | `Account`             |
-| Certificate        | `digicert_certificate` | `Certificate`         |
-| User               | `digicert_user`        | `User`                |
-
-### Relationships
-
-The following relationships are created:
-
-| From               | Relationship | To                     |
-| ------------------ | ------------ | ---------------------- |
-| `digicert_account` | **HAS**      | `digicert_certificate` |
-| `digicert_account` | **HAS**      | `digicert_user`        |
-
-The following relationships are mapped:
-
-| From     | Relationship | To            |
-| -------- | ------------ | ------------- |
-| `Domain` | **HAS**      | `Certificate` |
-
 [1]: https://www.digicert.com/rest-api/
 
 <!-- {J1_DOCUMENTATION_MARKER_START} -->
