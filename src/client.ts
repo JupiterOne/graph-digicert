@@ -107,7 +107,7 @@ export class ServicesClient {
     resourceKey: ResourceKey,
   ) {
     const defaultLimit = 1;
-    let hasNext = true;
+    let hasNext: boolean;
     let offset = 0;
 
     do {
@@ -166,9 +166,9 @@ export class ServicesClient {
       },
       {
         maxAttempts: 10,
-        delay: 200,
+        delay: 30_000,
         factor: 2,
-        jitter: true,
+        timeout: 180_000,
         handleError: (err, attemptContext) => {
           const errorProps = {
             status: err.status,

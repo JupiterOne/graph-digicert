@@ -1,5 +1,5 @@
 ---
-sourceId: managed:template
+sourceId: managed:digicert
 integrationDefinitionId: '${integration_definition_id}'
 questions:
   []
