@@ -106,7 +106,7 @@ export class ServicesClient {
     urlPath: string,
     resourceKey: ResourceKey,
   ) {
-    const defaultLimit = 1;
+    const defaultLimit = 500;
     let hasNext: boolean;
     let offset = 0;
 
