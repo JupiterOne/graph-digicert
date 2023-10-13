@@ -1,13 +1,14 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
-
-import instanceConfigFields from './instanceConfigFields';
-import validateInvocation from './validateInvocation';
-
-import synchronize from './steps/synchronize';
-import { DigiCertIntegrationInstanceConfig } from './types';
-
-export const invocationConfig: IntegrationInvocationConfig<DigiCertIntegrationInstanceConfig> = {
+import { integrationSteps } from './steps';
+import {
+  IntegrationConfig,
   instanceConfigFields,
   validateInvocation,
-  integrationSteps: [synchronize],
-};
+} from './config';
+
+export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> =
+  {
+    instanceConfigFields,
+    validateInvocation,
+    integrationSteps,
+  };
