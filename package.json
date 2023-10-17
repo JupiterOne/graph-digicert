@@ -2,6 +2,10 @@
   "name": "@jupiterone/graph-digicert",
   "version": "3.0.0",
   "description": "A graph conversion tool for https://digicert.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JupiterOne/graph-digicert"
+  },
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
