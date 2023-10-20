@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-digicert",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A graph conversion tool for https://digicert.com",
   "repository": {
     "type": "git",
