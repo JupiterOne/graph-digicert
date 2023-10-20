@@ -135,7 +135,7 @@ export const createOrderEntity = (data: DigiCertOrder): Entity => {
 
   assignTags(
     entity,
-    data.custom_fields.map(({ label, value }) => ({
+    data.custom_fields?.map(({ label, value }) => ({
       Key: label,
       Value: value,
     })),
