@@ -1,3 +1,20 @@
+# v3.1.0 (Fri Oct 20 2023)
+
+#### 🚀 Enhancement
+
+- add custom fields to order entities as tags [#42](https://github.com/JupiterOne/graph-digicert/pull/42) ([@matteobarone](https://github.com/matteobarone))
+
+#### ⚠️ Pushed to `main`
+
+- Populate CODEOWENRS, baseline package.json and baseline cortex.yaml ([@jablonnc](https://github.com/jablonnc))
+
+#### Authors: 2
+
+- Matteo Barone ([@matteobarone](https://github.com/matteobarone))
+- Noah Jablonski ([@jablonnc](https://github.com/jablonnc))
+
+---
+
 # v3.0.0 (Fri Oct 13 2023)
 
 #### 💥 Breaking Change
