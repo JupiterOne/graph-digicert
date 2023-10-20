@@ -1,3 +1,15 @@
+# v3.1.1 (Fri Oct 20 2023)
+
+#### 🐛 Bug Fix
+
+- Support entities without tags using conditionals [#43](https://github.com/JupiterOne/graph-digicert/pull/43) ([@i5o](https://github.com/i5o))
+
+#### Authors: 1
+
+- Ignacio Rodríguez ([@i5o](https://github.com/i5o))
+
+---
+
 # v3.1.0 (Fri Oct 20 2023)
 
 #### 🚀 Enhancement
