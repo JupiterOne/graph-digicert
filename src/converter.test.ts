@@ -43,7 +43,7 @@ test('should create order entity', () => {
       {
         metadata_id: 4242,
         label: 'bar',
-        value: '4242',
+        value: 'bar-42',
       },
     ],
   });
@@ -71,8 +71,8 @@ test('should create order entity', () => {
     renewed: true,
     signatureHash: 'sha512',
     status: 'active',
-    'tag.bar': '4242',
-    'tag.foo': '42',
+    'tag.bar': 'bar-42',
+    'tag.foo': 42,
     type: 'bar',
     validityYears: 1,
   });

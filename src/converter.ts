@@ -1,4 +1,6 @@
 import {
+  Entity,
+  assignTags,
   createIntegrationEntity,
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
@@ -8,22 +10,10 @@ import {
   DigiCertDomain,
   DigiCertOrder,
   DigiCertUser,
-  DigiCertOrderCustomField,
 } from './types';
 
 function createEntityKey(type: string, id: number | string): string {
   return `${type}:${id}`;
-}
-
-function createTagsBasedOnCustomFields(
-  customFields: DigiCertOrderCustomField[],
-) {
-  return customFields.reduce((acc, field) => {
-    return {
-      ...acc,
-      [`tag.${field.label}`]: field.value,
-    };
-  }, {});
 }
 
 export const createAccountEntity = (
@@ -107,10 +97,8 @@ export const createDomainEntity = (
     },
   });
 
-export const createOrderEntity = (
-  data: DigiCertOrder,
-): ReturnType<typeof createIntegrationEntity> =>
-  createIntegrationEntity({
+export const createOrderEntity = (data: DigiCertOrder): Entity => {
+  const entity = createIntegrationEntity({
     entityData: {
       source: data,
       assign: {
@@ -141,7 +129,17 @@ export const createOrderEntity = (
           data.status === 'issued' && parseTimePropertyValue(data.date_created),
         createdOn: parseTimePropertyValue(data.date_created),
         expiresOn: parseTimePropertyValue(data.certificate.valid_till),
-        ...createTagsBasedOnCustomFields(data.custom_fields),
       },
     },
   });
+
+  assignTags(
+    entity,
+    data.custom_fields.map(({ label, value }) => ({
+      Key: label,
+      Value: value,
+    })),
+  );
+
+  return entity;
+};

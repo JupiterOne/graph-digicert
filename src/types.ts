@@ -140,7 +140,7 @@ export interface DigiCertOrder {
   custom_fields: DigiCertOrderCustomField[];
 }
 
-export interface DigiCertOrderCustomField {
+interface DigiCertOrderCustomField {
   metadata_id: number;
   label: string;
   value: string;
