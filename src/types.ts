@@ -137,4 +137,11 @@ export interface DigiCertOrder {
   product: DigiCertProduct;
   has_duplicates: boolean;
   product_name_id: string;
+  custom_fields: DigiCertOrderCustomField[];
+}
+
+interface DigiCertOrderCustomField {
+  metadata_id: number;
+  label: string;
+  value: string;
 }

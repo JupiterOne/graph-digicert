@@ -1,4 +1,6 @@
 import {
+  Entity,
+  assignTags,
   createIntegrationEntity,
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
@@ -95,10 +97,8 @@ export const createDomainEntity = (
     },
   });
 
-export const createOrderEntity = (
-  data: DigiCertOrder,
-): ReturnType<typeof createIntegrationEntity> =>
-  createIntegrationEntity({
+export const createOrderEntity = (data: DigiCertOrder): Entity => {
+  const entity = createIntegrationEntity({
     entityData: {
       source: data,
       assign: {
@@ -132,3 +132,14 @@ export const createOrderEntity = (
       },
     },
   });
+
+  assignTags(
+    entity,
+    data.custom_fields.map(({ label, value }) => ({
+      Key: label,
+      Value: value,
+    })),
+  );
+
+  return entity;
+};
